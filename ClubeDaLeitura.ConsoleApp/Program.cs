@@ -1,19 +1,10 @@
-﻿while (true)
-{
-  Console.Clear();
-  Console.WriteLine("---------------------------------");
-  Console.WriteLine("Clube da Leitura");
-  Console.WriteLine("---------------------------------");
-  Console.WriteLine("1 - Gerenciar caixas de revistas");
-  Console.WriteLine("2 - Gerenciar revistas");
-  Console.WriteLine("3 - Gerenciar amigos");
-  Console.WriteLine("4 - Gerenciar empréstimos");
-  Console.WriteLine("S - Sair");
-  Console.WriteLine("---------------------------------");
-  Console.Write("> ");
-  string? opcaoMenuPrincipal = Console.ReadLine()?.ToUpper();
+﻿using ClubeDaLeitura.ConsoleApp.Presentation;
 
-  if (opcaoMenuPrincipal == "S")
+while (true)
+{
+  string mainMenuOption = ScreenUtils.GetMainMenuOption();
+
+  if (mainMenuOption == "S")
   {
     Console.Clear();
     break;
@@ -21,24 +12,24 @@
 
   while (true)
   {
-    string? opcaoMenuInterno = string.Empty;
+    string? innerMenuOption = string.Empty;
 
-    if (opcaoMenuPrincipal == "1")
+    if (mainMenuOption == "1")
     {
 
     }
 
-    else if (opcaoMenuPrincipal == "2")
+    else if (mainMenuOption == "2")
     {
 
     }
 
-    else if (opcaoMenuPrincipal == "3")
+    else if (mainMenuOption == "3")
     {
 
     }
 
-    else if (opcaoMenuPrincipal == "4")
+    else if (mainMenuOption == "4")
     {
 
     }
