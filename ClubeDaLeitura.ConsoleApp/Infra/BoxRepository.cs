@@ -11,4 +11,8 @@ public class BoxRepository
     boxes.Add(newBox);
   }
 
+  public List<Box> FindAll()
+  {
+    return boxes;
+  }
 }

@@ -23,6 +23,20 @@ while (true)
     if (mainMenuOption == "1")
     {
       innerMenuOption = boxScreen.GetMenuOption();
+
+      if (innerMenuOption == "S")
+      {
+        Console.Clear();
+        break;
+      }
+
+      if (innerMenuOption == "1") boxScreen.Register();
+
+      //else if (innerMenuOption == "2") boxScreen.Edit();
+
+      //else if (innerMenuOption == "3") boxScreen.Delete();
+
+      else if (innerMenuOption == "4") boxScreen.ShowAll(showHeader: true);
     }
 
     else if (mainMenuOption == "2")

@@ -13,17 +13,20 @@ public class BoxScreen
 
   public BoxScreen(BoxRepository _repository)
   {
+
     repository = _repository;
   }
+
   public string? GetMenuOption()
   {
+
     screen.MainHeader();
-    Console.WriteLine("\n[1] - Cadastrar Caixa");
-    Console.WriteLine("[2] - Editar Caixa");
-    Console.WriteLine("[3] - Excluir Caixa");
-    Console.WriteLine("[4] - Visualizar Caixas");
-    Console.WriteLine("[S] - Voltar para o início");
-    screen.ShowUISimpleLine();
+    Console.WriteLine("\n[1] Cadastrar Caixa");
+    Console.WriteLine("[2] Editar Caixa");
+    Console.WriteLine("[3] Excluir Caixa");
+    Console.WriteLine("[4] Visualizar Caixas");
+    Console.WriteLine("[S] Voltar para o início");
+    //screen.ShowUISimpleLine();
     Console.Write("\n> ");
     string? mainOption = Console.ReadLine()?.ToUpper();
 
@@ -39,26 +42,70 @@ public class BoxScreen
 
     repository?.Create(newBox);
 
-    screen.ShowMessage($"A caixa \"{newBox.Id}\" foi cadastrada com sucesso!");
+    screen.ShowMessage($"O registro \"{newBox.Id}\" foi cadastrado com sucesso!");
   }
+
+  public void ShowAll(bool showHeader)
+  {
+    if (showHeader) screen.OperationHeader("Visualização de Caixas");
+
+    string line = screen.GetUIDoubleLine();
+
+    Console.Write($"\n{line}");
+    Console.WriteLine(
+    "\n{0, -7} | {1, -20} | {2, -10} | {3, -20}",
+    "Id", "Etiqueta", "Cor", "Tempo de Empréstimo"
+    );
+
+    Box?[] boxes = [.. repository.FindAll()];
+
+    for (int i = 0; i < boxes.Length; i++)
+    {
+      Box? box = boxes[i];
+
+      if (box == null)
+        continue;
+
+      Console.WriteLine(
+          "{0, -7} | {1, -20} | {2, -10} | {3, -20}",
+          box.Id, box.Label, box.Color, box.LoanDays
+      );
+    }
+
+    Console.WriteLine(line);
+
+    if (showHeader)
+    {
+      Console.Write("\nDigite ENTER para continuar... ");
+      Console.ReadLine();
+    }
+  }
+
+
+  /* public void Edit()
+   {
+
+     screen.OperationHeader("Edição de Box");
+   } */
 
   private Box GetRegistrationData()
   {
 
-    Console.Write("Informe a etiqueta da caixa: ");
+    Console.WriteLine("\nInforme a etiqueta da caixa");
+    Console.Write("> ");
     string? label = Console.ReadLine();
 
-    Console.WriteLine("\n>> Selecione uma das cores abaixo");
     Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("1 - Vermelho");
+    Console.WriteLine("\n[1] Vermelho");
     Console.ForegroundColor = ConsoleColor.Green;
-    Console.WriteLine("2 - Verde");
+    Console.WriteLine("[2] Verde");
     Console.ForegroundColor = ConsoleColor.Blue;
-    Console.WriteLine("3 - Azul");
+    Console.WriteLine("[3] Azul");
     Console.ResetColor();
-    Console.WriteLine("4 - Branco (Padrão)");
+    Console.WriteLine("[4] Branco (Padrão)");
 
-    Console.Write("\n> ");
+    Console.WriteLine("\nSelecione uma das cores acima");
+    Console.Write("> ");
     string? colorOption = Console.ReadLine();
 
     string? color;
@@ -68,7 +115,8 @@ public class BoxScreen
     else if (colorOption == "3") color = "Azul";
     else color = "Branco";
 
-    Console.Write("Informe o tempo de empréstimo das revistas da caixa: ");
+    Console.WriteLine("\nInforme o tempo de empréstimo das revistas da caixa");
+    Console.Write("> ");
     int loanDays = Convert.ToInt32(Console.ReadLine());
 
     return new Box(label!, color, loanDays);

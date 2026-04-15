@@ -13,11 +13,11 @@ public class ScreenUtils
   public string GetMainMenuOption()
   {
     MainHeader();
-    Console.WriteLine("\n1 - Gerenciar Caixas de Revistas");
-    Console.WriteLine("2 - Gerenciar Revistas");
-    Console.WriteLine("3 - Gerenciar Amigos");
-    Console.WriteLine("4 - Gerenciar Empréstimos");
-    Console.WriteLine("S - Sair");
+    Console.WriteLine("\n[1] Gerenciar Caixas de Revistas");
+    Console.WriteLine("[2] Gerenciar Revistas");
+    Console.WriteLine("[3] Gerenciar Amigos");
+    Console.WriteLine("[4] Gerenciar Empréstimos");
+    Console.WriteLine("[S] Sair");
     Console.Write("\n> ");
     return Console.ReadLine()?.ToUpper()!;
   }
@@ -28,7 +28,7 @@ public class ScreenUtils
 
     Console.Clear();
     Console.WriteLine(line);
-    Console.WriteLine($"--------------------------------------- {title} ------------------------------------------");
+    Console.WriteLine($"------------------------------------------ {title} ----------------------------------------------");
     Console.WriteLine(line);
   }
 
@@ -42,6 +42,8 @@ public class ScreenUtils
 
   public void ShowMessage(string message)
   {
+    Console.WriteLine();
+
     ShowUISimpleLine();
     Console.WriteLine(message);
     ShowUISimpleLine();
@@ -52,11 +54,11 @@ public class ScreenUtils
 
   public string GetUIDoubleLine()
   {
-    return "=========================================================================================================";
+    return "==========================================================================================================";
   }
 
   public void ShowUISimpleLine()
   {
-    Console.WriteLine("---------------------------------------------------------------------------------------------------------");
+    Console.WriteLine("----------------------------------------------------------------------------------------------------------");
   }
 }
