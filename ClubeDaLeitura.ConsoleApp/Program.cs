@@ -1,8 +1,14 @@
-﻿using ClubeDaLeitura.ConsoleApp.Presentation;
+﻿using ClubeDaLeitura.ConsoleApp.Infra;
+using ClubeDaLeitura.ConsoleApp.Presentation;
+
+ScreenUtils screen = new("Clube da Leitura");
+
+BoxRepository boxRepository = new();
+BoxScreen boxScreen = new(boxRepository);
 
 while (true)
 {
-  string mainMenuOption = ScreenUtils.GetMainMenuOption();
+  string mainMenuOption = screen.GetMainMenuOption();
 
   if (mainMenuOption == "S")
   {
@@ -16,7 +22,7 @@ while (true)
 
     if (mainMenuOption == "1")
     {
-
+      innerMenuOption = boxScreen.GetMenuOption();
     }
 
     else if (mainMenuOption == "2")
