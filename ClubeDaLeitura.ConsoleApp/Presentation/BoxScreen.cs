@@ -1,5 +1,3 @@
-using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
 using ClubeDaLeitura.ConsoleApp.Domain;
 using ClubeDaLeitura.ConsoleApp.Infra;
 
@@ -81,12 +79,38 @@ public class BoxScreen
     }
   }
 
+  public void Edit()
+  {
 
-  /* public void Edit()
-   {
+    screen.OperationHeader("Edição de Caixa");
 
-     screen.OperationHeader("Edição de Box");
-   } */
+    ShowAll(showHeader: false);
+
+    string? selectedId;
+
+    do
+    {
+
+      Console.WriteLine("\nDigite o ID do registro que deseja editar");
+      Console.Write("> ");
+      selectedId = Console.ReadLine();
+
+      if (!string.IsNullOrWhiteSpace(selectedId) && selectedId.Length == 7)
+      {
+        screen.ShowUISimpleLine();
+        break;
+      }
+    } while (true);
+
+    Box newBox = GetRegistrationData();
+
+    bool success = repository.Update(selectedId, newBox);
+
+    if (!success)
+      screen.ShowMessage("Não foi possível encontrar o registro requisitado");
+
+    screen.ShowMessage($"O registro \"{selectedId}\" foi editado com sucesso.");
+  }
 
   private Box GetRegistrationData()
   {

@@ -11,8 +11,27 @@ public class BoxRepository
     boxes.Add(newBox);
   }
 
+  public bool Update(string id, Box newBox)
+  {
+
+    Box? box = FindById(id);
+
+    if (box == null) return false;
+
+    box.Label = newBox.Label;
+    box.Color = newBox.Color;
+    box.LoanDays = newBox.LoanDays;
+
+    return true;
+  }
   public List<Box> FindAll()
   {
     return boxes;
+  }
+
+  public Box? FindById(string id)
+  {
+
+    return boxes.Find(b => b.Id == id);
   }
 }

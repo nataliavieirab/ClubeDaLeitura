@@ -32,7 +32,7 @@ while (true)
 
       if (innerMenuOption == "1") boxScreen.Register();
 
-      //else if (innerMenuOption == "2") boxScreen.Edit();
+      else if (innerMenuOption == "2") boxScreen.Edit();
 
       //else if (innerMenuOption == "3") boxScreen.Delete();
 
