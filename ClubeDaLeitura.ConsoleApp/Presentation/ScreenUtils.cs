@@ -1,10 +1,18 @@
 namespace ClubeDaLeitura.ConsoleApp.Presentation;
 
-static class ScreenUtils
+public class ScreenUtils
 {
-  public static string GetMainMenuOption()
+
+  public string? title;
+
+  public ScreenUtils(string _title)
   {
-    ShowMainHeader("Clube da Leitura");
+    title = _title;
+  }
+
+  public string GetMainMenuOption()
+  {
+    MainHeader();
     Console.WriteLine("\n1 - Gerenciar Caixas de Revistas");
     Console.WriteLine("2 - Gerenciar Revistas");
     Console.WriteLine("3 - Gerenciar Amigos");
@@ -14,7 +22,7 @@ static class ScreenUtils
     return Console.ReadLine()?.ToUpper()!;
   }
 
-  public static void ShowMainHeader(string title)
+  public void MainHeader()
   {
     string line = GetUIDoubleLine();
 
@@ -24,19 +32,30 @@ static class ScreenUtils
     Console.WriteLine(line);
   }
 
-  public static void ShowOperationHeader(string operation)
+  public void OperationHeader(string operation)
   {
-    string centeredText = new string(' ', 38) + operation;
+    MainHeader();
 
-    Console.WriteLine($"\n{centeredText}");
+    string centeredText = new string(' ', 38) + operation;
+    Console.WriteLine($"\n{centeredText.ToUpper()}");
   }
 
-  public static string GetUIDoubleLine()
+  public void ShowMessage(string message)
+  {
+    ShowUISimpleLine();
+    Console.WriteLine(message);
+    ShowUISimpleLine();
+
+    Console.WriteLine("\nDigite ENTER para continuar...");
+    Console.ReadLine();
+  }
+
+  public string GetUIDoubleLine()
   {
     return "=========================================================================================================";
   }
 
-  public static void ShowUISimpleLine()
+  public void ShowUISimpleLine()
   {
     Console.WriteLine("---------------------------------------------------------------------------------------------------------");
   }
