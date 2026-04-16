@@ -18,9 +18,7 @@ public class BoxRepository
 
     if (box == null) return false;
 
-    box.Label = newBox.Label;
-    box.Color = newBox.Color;
-    box.LoanDays = newBox.LoanDays;
+    box.UpdateRegister(newBox);
 
     return true;
   }

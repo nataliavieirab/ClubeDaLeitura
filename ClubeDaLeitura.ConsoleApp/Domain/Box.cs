@@ -19,4 +19,11 @@ public class Box
     Color = color;
     LoanDays = loanDays;
   }
+
+  public void UpdateRegister(Box updatedBox)
+  {
+    Label = updatedBox.Label;
+    Color = updatedBox.Color;
+    LoanDays = updatedBox.LoanDays;
+  }
 }
