@@ -2,7 +2,6 @@ namespace ClubeDaLeitura.ConsoleApp.Presentation;
 
 public class ScreenUtils
 {
-
   public string? title;
 
   public ScreenUtils(string _title)
