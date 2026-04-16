@@ -26,4 +26,20 @@ public class Box
     Color = updatedBox.Color;
     LoanDays = updatedBox.LoanDays;
   }
+
+  public string[] Validate()
+  {
+    string errors = string.Empty;
+
+    if (string.IsNullOrWhiteSpace(Label))
+      errors += "⚠️   O campo \"Etiqueta\" é obrigatório;";
+
+    else if (Label.Length > 50)
+      errors += "⚠️   O campo \"Etiqueta\" deve conter no máximo 50 caracteres;";
+
+    if (LoanDays < 1)
+      errors += "⚠️   O campo \"Tempo de Empréstimo\" deve conter um valor maior que 0;";
+
+    return errors.Split(';', StringSplitOptions.RemoveEmptyEntries);
+  }
 }

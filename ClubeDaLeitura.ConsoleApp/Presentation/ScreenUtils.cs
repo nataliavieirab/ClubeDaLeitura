@@ -51,6 +51,25 @@ public class ScreenUtils
     Console.ReadLine();
   }
 
+  public void ShowError(string[] errors)
+  {
+    Console.WriteLine();
+    // ShowUISimpleLine();
+
+    Console.ForegroundColor = ConsoleColor.Red;
+
+    for (int i = 0; i < errors.Length; i++)
+    {
+      string error = errors[i];
+
+      Console.WriteLine(error);
+    }
+
+    Console.ResetColor();
+    Console.Write("\nDigite ENTER para continuar...");
+    Console.ReadLine();
+  }
+
   public string GetUIDoubleLine()
   {
     return "==========================================================================================================";
