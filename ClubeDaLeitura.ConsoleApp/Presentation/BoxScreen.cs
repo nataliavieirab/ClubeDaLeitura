@@ -86,30 +86,58 @@ public class BoxScreen
 
     ShowAll(showHeader: false);
 
-    string? selectedId;
+    string? selectedId = GetID();
 
-    do
-    {
-
-      Console.WriteLine("\nDigite o ID do registro que deseja editar");
-      Console.Write("> ");
-      selectedId = Console.ReadLine();
-
-      if (!string.IsNullOrWhiteSpace(selectedId) && selectedId.Length == 7)
-      {
-        screen.ShowUISimpleLine();
-        break;
-      }
-    } while (true);
+    Console.WriteLine();
+    screen.ShowUISimpleLine();
 
     Box newBox = GetRegistrationData();
 
     bool success = repository.Update(selectedId, newBox);
 
     if (!success)
-      screen.ShowMessage("Não foi possível encontrar o registro requisitado");
+    {
+      screen.ShowMessage("Não foi possível encontrar o registro requisitado.");
+      return;
+    }
 
     screen.ShowMessage($"O registro \"{selectedId}\" foi editado com sucesso.");
+  }
+
+  public void Delete()
+  {
+
+    screen.OperationHeader("Exclusão de Caixa");
+
+    ShowAll(showHeader: false);
+
+    string? selectedId = GetID();
+
+    bool success = repository.Delete(selectedId);
+
+    if (!success)
+    {
+      screen.ShowMessage("Não foi possível encontrar o registro requisitado.");
+      return;
+    }
+
+    screen.ShowMessage($"O registro \"{selectedId}\" foi excluído com sucesso.");
+  }
+
+  private string GetID()
+  {
+    string? selectedId;
+
+    do
+    {
+      Console.WriteLine("\nDigite o ID da caixa");
+      Console.Write("> ");
+      selectedId = Console.ReadLine();
+
+      if (!string.IsNullOrWhiteSpace(selectedId) && selectedId.Length == 7) break;
+    } while (true);
+
+    return selectedId;
   }
 
   private Box GetRegistrationData()

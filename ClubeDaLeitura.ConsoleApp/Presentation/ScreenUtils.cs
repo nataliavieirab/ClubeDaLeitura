@@ -36,7 +36,7 @@ public class ScreenUtils
   {
     MainHeader();
 
-    string centeredText = new string(' ', 38) + operation;
+    string centeredText = new string(' ', 42) + operation;
     Console.WriteLine($"\n{centeredText.ToUpper()}");
   }
 

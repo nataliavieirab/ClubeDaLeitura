@@ -34,7 +34,7 @@ while (true)
 
       else if (innerMenuOption == "2") boxScreen.Edit();
 
-      //else if (innerMenuOption == "3") boxScreen.Delete();
+      else if (innerMenuOption == "3") boxScreen.Delete();
 
       else if (innerMenuOption == "4") boxScreen.ShowAll(showHeader: true);
     }

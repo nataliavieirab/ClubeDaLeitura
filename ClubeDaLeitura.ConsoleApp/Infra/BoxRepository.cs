@@ -1,5 +1,4 @@
 using ClubeDaLeitura.ConsoleApp.Domain;
-
 namespace ClubeDaLeitura.ConsoleApp.Infra;
 
 public class BoxRepository
@@ -8,6 +7,7 @@ public class BoxRepository
 
   public void Create(Box newBox)
   {
+
     boxes.Add(newBox);
   }
 
@@ -24,8 +24,20 @@ public class BoxRepository
 
     return true;
   }
+
+  public bool Delete(string id)
+  {
+    Box? box = FindById(id);
+
+    if (box == null) return false;
+
+    boxes.Remove(box);
+
+    return true;
+  }
   public List<Box> FindAll()
   {
+
     return boxes;
   }
 
