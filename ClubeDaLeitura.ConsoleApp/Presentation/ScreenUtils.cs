@@ -47,6 +47,11 @@ public class ScreenUtils
     Console.WriteLine(message);
     ShowUISimpleLine();
 
+    ShowEnterMessage();
+  }
+
+  public void ShowEnterMessage()
+  {
     Console.WriteLine("\nDigite ENTER para continuar...");
     Console.ReadLine();
   }
@@ -54,20 +59,21 @@ public class ScreenUtils
   public void ShowError(string[] errors)
   {
     Console.WriteLine();
-    // ShowUISimpleLine();
-
-    Console.ForegroundColor = ConsoleColor.Red;
 
     for (int i = 0; i < errors.Length; i++)
     {
       string error = errors[i];
 
+      ShowUISimpleLine();
+
+      Console.ForegroundColor = ConsoleColor.Red;
       Console.WriteLine(error);
+      Console.ResetColor();
+
+      ShowUISimpleLine();
     }
 
-    Console.ResetColor();
-    Console.Write("\nDigite ENTER para continuar...");
-    Console.ReadLine();
+    ShowEnterMessage();
   }
 
   public string GetUIDoubleLine()
