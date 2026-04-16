@@ -47,4 +47,20 @@ public class BoxRepository
 
     return boxes.Find(b => b.Id == id);
   }
+
+  public Box? FindByLabel(string label)
+  {
+    Box[] boxes = [.. FindAll()];
+
+    for (int i = 0; i < boxes.Length; i++)
+    {
+
+      Box box = boxes[i];
+
+      if (boxes[i].Label == label)
+        return box;
+    }
+
+    return null;
+  }
 }

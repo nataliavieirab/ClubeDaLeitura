@@ -143,9 +143,19 @@ public class BoxScreen
   private Box GetRegistrationData()
   {
 
-    Console.WriteLine("\nInforme a etiqueta da caixa");
-    Console.Write("> ");
-    string? label = Console.ReadLine();
+    string? label;
+
+    do
+    {
+
+      Console.WriteLine("\nInforme a etiqueta da caixa");
+      Console.Write("> ");
+      label = Console.ReadLine()?.ToUpper(); ;
+
+      if (repository.FindByLabel(label!) == null) break;
+
+      Console.WriteLine("\n⚠️ Já existe um registro de caixa com esta etiqueta.");
+    } while (true);
 
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("\n[1] Vermelho");
