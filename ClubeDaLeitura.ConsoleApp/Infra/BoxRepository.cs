@@ -40,7 +40,7 @@ public class BoxRepository
     return boxes;
   }
 
-  public Box? FindById(string id)
+  public Box? FindById(string? id)
   {
 
     return boxes.Find(b => b.Id == id);
