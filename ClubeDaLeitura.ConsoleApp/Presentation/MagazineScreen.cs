@@ -80,6 +80,9 @@ public class MagazineScreen
   private Box SelectBox()
   {
 
+    screen.OperationHeader("GUARDAR REVISTA");
+
+    Console.WriteLine("📋 LISTA DE CAIXAS:");
     boxScreen.ShowAll(showHeader: false);
 
     string? boxId;
