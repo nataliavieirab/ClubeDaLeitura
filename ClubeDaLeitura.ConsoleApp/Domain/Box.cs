@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 namespace ClubeDaLeitura.ConsoleApp.Domain;
 
-public class Box : BaseEntity
+public class Box : DefaultEntity
 {
   public string Label { get; set; }
   public string Color { get; set; }

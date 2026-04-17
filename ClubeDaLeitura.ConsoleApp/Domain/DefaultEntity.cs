@@ -2,11 +2,11 @@ using System.Security.Cryptography;
 
 namespace ClubeDaLeitura.ConsoleApp.Domain;
 
-public class BaseEntity
+public class DefaultEntity
 {
   public string Id { get; set; } = string.Empty;
 
-  public BaseEntity()
+  public DefaultEntity()
   {
 
     Id = Convert

@@ -1,6 +1,6 @@
 namespace ClubeDaLeitura.ConsoleApp.Domain;
 
-public class Magazine : BaseEntity
+public class Magazine : DefaultEntity
 {
   public string Title { get; set; }
   public int NumberEdition { get; set; }
