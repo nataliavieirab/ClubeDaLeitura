@@ -1,10 +1,20 @@
-﻿using ClubeDaLeitura.ConsoleApp.Infra;
+﻿using ClubeDaLeitura.ConsoleApp.Domain;
+using ClubeDaLeitura.ConsoleApp.Infra;
 using ClubeDaLeitura.ConsoleApp.Presentation;
 
-ScreenUtils screen = new("Clube da Leitura");
-
 BoxRepository boxRepository = new();
+MagazineRepository magazineRepository = new();
+
 BoxScreen boxScreen = new(boxRepository);
+MagazineScreen magazineScreen = new(magazineRepository, boxRepository, boxScreen);
+
+Box box = new("Lançamentos", "Vermelho", 3);
+boxRepository.Create(box);
+
+Magazine magazine = new("Action Comics", 155, 1990, box);
+magazineRepository.Create(magazine);
+
+ScreenUtils screen = new("Clube da Leitura");
 
 while (true)
 {
@@ -41,7 +51,21 @@ while (true)
 
     else if (mainMenuOption == "2")
     {
+      innerMenuOption = magazineScreen.GetMenuOption();
 
+      if (innerMenuOption == "S")
+      {
+        Console.Clear();
+        break;
+      }
+
+      if (innerMenuOption == "1") magazineScreen.Register();
+
+      // else if (innerMenuOption == "2") magazineScreen.Edit();
+
+      // else if (innerMenuOption == "3") magazineScreen.Delete();
+
+      // else if (innerMenuOption == "4") magazineScreen.ShowAll(showHeader: true);
     }
 
     else if (mainMenuOption == "3")
