@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 namespace ClubeDaLeitura.ConsoleApp.Domain;
 
-public class Box : DefaultEntity
+public class Box : DefaultEntity<Box>
 {
   public string Label { get; set; }
   public string Color { get; set; }
@@ -15,7 +15,7 @@ public class Box : DefaultEntity
     LoanDays = loanDays;
   }
 
-  public string[] Validate()
+  public override string[] Validate()
   {
     string errors = string.Empty;
 
@@ -31,7 +31,7 @@ public class Box : DefaultEntity
     return errors.Split(';', StringSplitOptions.RemoveEmptyEntries);
   }
 
-  public void UpdateRegister(Box updatedBox)
+  public override void UpdateRegister(Box updatedBox)
   {
 
     Label = updatedBox.Label;

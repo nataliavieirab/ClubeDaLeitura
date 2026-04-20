@@ -1,6 +1,6 @@
 namespace ClubeDaLeitura.ConsoleApp.Domain;
 
-public class Magazine : DefaultEntity
+public class Magazine : DefaultEntity<Magazine>
 {
   public string Title { get; set; }
   public int NumberEdition { get; set; }
@@ -16,7 +16,7 @@ public class Magazine : DefaultEntity
     Box = box;
   }
 
-  public string[] Validate()
+  public override string[] Validate()
   {
     string errors = string.Empty;
 
@@ -40,9 +40,8 @@ public class Magazine : DefaultEntity
     return errors.Split(';', StringSplitOptions.RemoveEmptyEntries);
   }
 
-  public void UpdateRegister(Magazine updatedMagazine)
+  public override void UpdateRegister(Magazine updatedMagazine)
   {
-
     Title = updatedMagazine.Title;
     NumberEdition = updatedMagazine.NumberEdition;
     ReleaseYear = updatedMagazine.ReleaseYear;

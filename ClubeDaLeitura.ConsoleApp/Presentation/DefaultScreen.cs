@@ -1,6 +1,130 @@
+using ClubeDaLeitura.ConsoleApp.Domain;
+using ClubeDaLeitura.ConsoleApp.Infra;
+
 namespace ClubeDaLeitura.ConsoleApp.Presentation;
 
-public class DefaultScreen
+public abstract class DefaultScreen<T> where T : DefaultEntity<T>
 {
+  private readonly ScreenUtils screen;
+  public string entityName = string.Empty;
 
+  private DefaultRepository<T> repository;
+
+  public DefaultScreen(string entityName, DefaultRepository<T> repository)
+  {
+    this.screen = new ScreenUtils($"Gestão de {entityName}");
+    this.entityName = entityName;
+    this.repository = repository;
+  }
+
+  public string? GetMenuOption()
+  {
+
+    screen.MainHeader();
+    Console.WriteLine($"\n[1] Cadastrar {entityName}");
+    Console.WriteLine($"[2] Editar {entityName}");
+    Console.WriteLine($"[3] Excluir {entityName}");
+    Console.WriteLine($"[4] Visualizar {entityName}s");
+    Console.WriteLine($"[S] Voltar para o início");
+    Console.Write("\n> ");
+    string? mainOption = Console.ReadLine()?.ToUpper();
+
+    return mainOption;
+  }
+  public void Register()
+  {
+
+    screen.OperationHeader($"Cadastro de {entityName}");
+
+    T newEntity = GetRegistrationData();
+
+    string[] errors = newEntity.Validate();
+
+    if (errors.Length > 0)
+    {
+      screen.ShowError(errors);
+
+      Register();
+      return;
+    }
+
+    repository?.Create(newEntity);
+
+    screen.ShowMessage($"✅ O registro \"{newEntity.Id}\" foi cadastrado com sucesso!");
+  }
+
+  public void Edit()
+  {
+
+    screen.OperationHeader($"Edição de {entityName}");
+
+    ShowAll(showHeader: false);
+
+    string? selectedId = GetID();
+
+    Console.WriteLine();
+    screen.ShowUISimpleLine();
+
+    T newEntity = GetRegistrationData();
+
+    string[] errors = newEntity.Validate();
+
+    if (errors.Length > 0)
+    {
+      screen.ShowError(errors);
+
+      Edit();
+      return;
+    }
+
+    bool success = repository.Update(selectedId, newEntity);
+
+    if (!success)
+    {
+      screen.ShowMessage("❌ Não foi possível encontrar o registro requisitado.");
+      return;
+    }
+
+    screen.ShowMessage($"✅ O registro \"{selectedId}\" foi editado com sucesso.");
+  }
+
+  public void Delete()
+  {
+
+    screen.OperationHeader($"Exclusão de {entityName}");
+
+    ShowAll(showHeader: false);
+
+    string? selectedId = GetID();
+
+    bool success = repository.Delete(selectedId);
+
+    if (!success)
+    {
+      screen.ShowMessage("❌ Não foi possível encontrar o registro requisitado.");
+      return;
+    }
+
+    screen.ShowMessage($"✅ O registro \"{selectedId}\" foi excluído com sucesso.");
+  }
+
+  public abstract void ShowAll(bool showHeader);
+
+  protected abstract T GetRegistrationData();
+
+  private string GetID()
+  {
+    string? selectedId;
+
+    do
+    {
+      Console.WriteLine($"\nDigite o ID da {entityName}");
+      Console.Write("> ");
+      selectedId = Console.ReadLine();
+
+      if (!string.IsNullOrWhiteSpace(selectedId) && selectedId.Length == 7) break;
+    } while (true);
+
+    return selectedId;
+  }
 }

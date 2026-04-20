@@ -3,112 +3,19 @@ using ClubeDaLeitura.ConsoleApp.Infra;
 
 namespace ClubeDaLeitura.ConsoleApp.Presentation;
 
-public class BoxScreen
+public class BoxScreen : DefaultScreen<Box>
 {
 
   private readonly ScreenUtils screen = new("Gestão de Caixa");
   private readonly BoxRepository repository;
 
-  public BoxScreen(BoxRepository _repository)
+  public BoxScreen(BoxRepository repository) : base("Caixa", repository)
   {
 
-    repository = _repository;
+    this.repository = repository;
   }
 
-  public string? GetMenuOption()
-  {
-
-    screen.MainHeader();
-    Console.WriteLine("\n[1] Cadastrar Caixa");
-    Console.WriteLine("[2] Editar Caixa");
-    Console.WriteLine("[3] Excluir Caixa");
-    Console.WriteLine("[4] Visualizar Caixas");
-    Console.WriteLine("[S] Voltar para o início");
-    //screen.ShowUISimpleLine();
-    Console.Write("\n> ");
-    string? mainOption = Console.ReadLine()?.ToUpper();
-
-    return mainOption;
-  }
-
-  public void Register()
-  {
-
-    screen.OperationHeader("Cadastro de Caixa");
-
-    Box newBox = GetRegistrationData();
-
-    string[] errors = newBox.Validate();
-
-    if (errors.Length > 0)
-    {
-      screen.ShowError(errors);
-
-      Register();
-      return;
-    }
-
-    repository?.Create(newBox);
-
-    screen.ShowMessage($"✅ O registro \"{newBox.Id}\" foi cadastrado com sucesso!");
-  }
-
-  public void Edit()
-  {
-
-    screen.OperationHeader("Edição de Caixa");
-
-    ShowAll(showHeader: false);
-
-    string? selectedId = GetID();
-
-    Console.WriteLine();
-    screen.ShowUISimpleLine();
-
-    Box newBox = GetRegistrationData();
-
-    string[] errors = newBox.Validate();
-
-    if (errors.Length > 0)
-    {
-      screen.ShowError(errors);
-
-      Edit();
-      return;
-    }
-
-    bool success = repository.Update(selectedId, newBox);
-
-    if (!success)
-    {
-      screen.ShowMessage("❌ Não foi possível encontrar o registro requisitado.");
-      return;
-    }
-
-    screen.ShowMessage($"✅ O registro \"{selectedId}\" foi editado com sucesso.");
-  }
-
-  public void Delete()
-  {
-
-    screen.OperationHeader("Exclusão de Caixa");
-
-    ShowAll(showHeader: false);
-
-    string? selectedId = GetID();
-
-    bool success = repository.Delete(selectedId);
-
-    if (!success)
-    {
-      screen.ShowMessage("❌ Não foi possível encontrar o registro requisitado.");
-      return;
-    }
-
-    screen.ShowMessage($"✅ O registro \"{selectedId}\" foi excluído com sucesso.");
-  }
-
-  public void ShowAll(bool showHeader)
+  public override void ShowAll(bool showHeader)
   {
     if (showHeader) screen.OperationHeader("Visualização de Caixas");
 
@@ -140,7 +47,6 @@ public class BoxScreen
       else if (selectedColor == "Azul")
         Console.ForegroundColor = ConsoleColor.Blue;
 
-
       Console.WriteLine(
           "{0, -7} | {1, -20} | {2, -10} | {3, -20}",
           box.Id, box.Label, box.Color, box.LoanDays
@@ -158,7 +64,7 @@ public class BoxScreen
     }
   }
 
-  private Box GetRegistrationData()
+  protected override Box GetRegistrationData()
   {
 
     string? label;
@@ -202,19 +108,4 @@ public class BoxScreen
     return new Box(label!, color, loanDays);
   }
 
-  private string GetID()
-  {
-    string? selectedId;
-
-    do
-    {
-      Console.WriteLine("\nDigite o ID da caixa");
-      Console.Write("> ");
-      selectedId = Console.ReadLine();
-
-      if (!string.IsNullOrWhiteSpace(selectedId) && selectedId.Length == 7) break;
-    } while (true);
-
-    return selectedId;
-  }
 }

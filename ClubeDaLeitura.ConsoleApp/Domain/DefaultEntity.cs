@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 
 namespace ClubeDaLeitura.ConsoleApp.Domain;
 
-public class DefaultEntity
+public abstract class DefaultEntity<T> where T : DefaultEntity<T>
 {
   public string Id { get; set; } = string.Empty;
 
@@ -15,5 +15,6 @@ public class DefaultEntity
         .Substring(0, 7);
   }
 
-  // public abstract void UpdateRegister(BaseEntity updatedEntity);
+  public abstract string[] Validate();
+  public abstract void UpdateRegister(T updatedEntity);
 }

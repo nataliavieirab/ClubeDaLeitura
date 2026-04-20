@@ -3,7 +3,7 @@ using ClubeDaLeitura.ConsoleApp.Infra;
 
 namespace ClubeDaLeitura.ConsoleApp.Presentation;
 
-public class MagazineScreen
+public class MagazineScreen : DefaultScreen<Magazine>
 {
 
   private readonly ScreenUtils screen = new("Gestão de Revistas");
@@ -11,7 +11,7 @@ public class MagazineScreen
   public BoxRepository boxRepository;
   public BoxScreen boxScreen;
 
-  public MagazineScreen(MagazineRepository _repository, BoxRepository _boxRepository, BoxScreen _boxScreen)
+  public MagazineScreen(MagazineRepository _repository, BoxRepository _boxRepository, BoxScreen _boxScreen) : base("Revista", _repository)
   {
 
     repository = _repository;
@@ -19,45 +19,7 @@ public class MagazineScreen
     boxScreen = _boxScreen;
   }
 
-  public string? GetMenuOption()
-  {
-
-    screen.MainHeader();
-    Console.WriteLine("\n[1] Cadastrar Revista");
-    Console.WriteLine("[2] Editar Revista");
-    Console.WriteLine("[3] Excluir Revista");
-    Console.WriteLine("[4] Visualizar Revistas");
-    Console.WriteLine("[S] Voltar para o início");
-    Console.Write("\n> ");
-    string? mainOption = Console.ReadLine()?.ToUpper();
-
-    return mainOption;
-  }
-
-  public void Register()
-  {
-
-    screen.OperationHeader("Cadastro de Revista");
-
-    Magazine newMagazine = GetRegistrationData();
-
-    string[] errors = newMagazine.Validate();
-
-    if (errors.Length > 0)
-    {
-
-      screen.ShowError(errors);
-
-      Register();
-      return;
-    }
-
-    repository.Create(newMagazine);
-
-    screen.ShowMessage($"✅ O registro \"{newMagazine.Id}\" foi cadastrado com sucesso!");
-  }
-
-  public void ShowAll(bool showHeader)
+  public override void ShowAll(bool showHeader)
   {
     if (showHeader) screen.OperationHeader("Visualização de Revistas");
 
@@ -108,7 +70,8 @@ public class MagazineScreen
       Console.ReadLine();
     }
   }
-  public Magazine GetRegistrationData()
+
+  protected override Magazine GetRegistrationData()
   {
 
     Console.WriteLine("\nInforme o título da revista");
