@@ -65,7 +65,7 @@ while (true)
 
       // else if (innerMenuOption == "3") magazineScreen.Delete();
 
-      // else if (innerMenuOption == "4") magazineScreen.ShowAll(showHeader: true);
+      else if (innerMenuOption == "4") magazineScreen.ShowAll(showHeader: true);
     }
 
     else if (mainMenuOption == "3")

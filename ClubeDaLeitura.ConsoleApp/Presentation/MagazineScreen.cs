@@ -57,6 +57,57 @@ public class MagazineScreen
     screen.ShowMessage($"✅ O registro \"{newMagazine.Id}\" foi cadastrado com sucesso!");
   }
 
+  public void ShowAll(bool showHeader)
+  {
+    if (showHeader) screen.OperationHeader("Visualização de Revistas");
+
+    string line = screen.GetUIDoubleLine();
+
+    Console.Write($"\n{line}");
+    Console.WriteLine(
+        "\n{0, -7} | {1, -25} | {2, -6} | {3, -4} | {4, -15}",
+        "ID", "Título", "Edição", "Ano", "Caixa"
+    );
+
+    Magazine?[] magazines = [.. repository.FindAll()];
+
+    for (int i = 0; i < magazines.Length; i++)
+    {
+      Magazine? m = magazines[i];
+
+      if (m == null)
+        continue;
+
+      Console.Write("{0, -7} | ", m.Id);
+      Console.Write("{0, -25} | ", m.Title);
+      Console.Write("{0, -6} | ", m.NumberEdition);
+      Console.Write("{0, -4} | ", m.ReleaseYear);
+
+      string selectedColor = m.Box.Color;
+
+      if (selectedColor == "Vermelho")
+        Console.ForegroundColor = ConsoleColor.Red;
+
+      else if (selectedColor == "Verde")
+        Console.ForegroundColor = ConsoleColor.Green;
+
+      else if (selectedColor == "Azul")
+        Console.ForegroundColor = ConsoleColor.Blue;
+
+      Console.Write("{0, -15}", m.Box.Label);
+
+      Console.ResetColor();
+      Console.WriteLine();
+    }
+
+    Console.WriteLine(line);
+
+    if (showHeader)
+    {
+      Console.Write("\nDigite ENTER para continuar... ");
+      Console.ReadLine();
+    }
+  }
   public Magazine GetRegistrationData()
   {
 

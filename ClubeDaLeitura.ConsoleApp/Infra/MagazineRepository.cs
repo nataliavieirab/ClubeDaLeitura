@@ -10,4 +10,9 @@ public class MagazineRepository
   {
     magazines.Add(newMagazine);
   }
+
+  public List<Magazine> FindAll()
+  {
+    return magazines;
+  }
 }
