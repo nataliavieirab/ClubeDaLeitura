@@ -129,10 +129,24 @@ public class BoxScreen
       if (box == null)
         continue;
 
+      string selectedColor = box.Color;
+
+      if (selectedColor == "Vermelho")
+        Console.ForegroundColor = ConsoleColor.Red;
+
+      else if (selectedColor == "Verde")
+        Console.ForegroundColor = ConsoleColor.Green;
+
+      else if (selectedColor == "Azul")
+        Console.ForegroundColor = ConsoleColor.Blue;
+
+
       Console.WriteLine(
           "{0, -7} | {1, -20} | {2, -10} | {3, -20}",
           box.Id, box.Label, box.Color, box.LoanDays
       );
+
+      Console.ResetColor();
     }
 
     Console.WriteLine(line);
