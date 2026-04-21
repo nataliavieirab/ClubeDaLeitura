@@ -1,6 +1,5 @@
+using ClubeDaLeitura.ConsoleApp.Domain;
+
 namespace ClubeDaLeitura.ConsoleApp.Infra;
 
-public class FriendsRepository
-{
-
-}
+public class FriendRepository : DefaultRepository<Friend>;

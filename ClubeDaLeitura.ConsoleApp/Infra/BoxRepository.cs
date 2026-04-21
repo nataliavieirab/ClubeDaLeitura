@@ -3,7 +3,6 @@ namespace ClubeDaLeitura.ConsoleApp.Infra;
 
 public class BoxRepository : DefaultRepository<Box>
 {
-
   public Box? FindByLabel(string label)
   {
     Box[] boxes = [.. FindAll()];
