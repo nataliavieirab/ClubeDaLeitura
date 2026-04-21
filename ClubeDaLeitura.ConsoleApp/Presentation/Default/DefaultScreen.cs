@@ -31,6 +31,7 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
 
     return mainOption;
   }
+
   public void Register()
   {
 
