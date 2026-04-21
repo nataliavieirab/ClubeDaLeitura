@@ -92,9 +92,23 @@ while (true)
       else if (innerMenuOption == "4") friendScreen.ShowAll(showHeader: true);
     }
 
-    else if (mainMenuOption == "4")
+    else if (mainMenuOption == "4") // Loans
     {
+      // innerMenuOption = loanScreen.GetMenuOption();
 
+      if (innerMenuOption == "S")
+      {
+        Console.Clear();
+        break;
+      }
+
+      // if (innerMenuOption == "1") loanScreen.Register();
+
+      // else if (innerMenuOption == "2") loanScreen.Edit();
+
+      // else if (innerMenuOption == "3") loanScreen.Delete();
+
+      // else if (innerMenuOption == "4") loanScreen.ShowAll(showHeader: true);
     }
   }
 }
