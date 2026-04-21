@@ -21,7 +21,7 @@ public class FriendScreen : DefaultScreen<Friend>
 
     Console.Write($"\n{line}");
     Console.WriteLine(
-        "{0, -7} | {1, -15} | {2, -15} | {3, -13}",
+        "\n{0, -7} | {1, -15} | {2, -15} | {3, -13}",
         "ID", "Nome", "Responsável", "Telefone"
     );
 
@@ -53,7 +53,7 @@ public class FriendScreen : DefaultScreen<Friend>
 
   protected override Friend GetRegistrationData()
   {
-    Console.Write("Digite o nome: ");
+    Console.Write("\nDigite o nome: ");
     string name = Console.ReadLine() ?? string.Empty;
 
     Console.Write("Digite o nome do responsável: ");
