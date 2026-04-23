@@ -12,5 +12,8 @@ public class LoanRepository
     loans.Add(loan);
   }
 
-
+  public List<Loan> FindAll()
+  {
+    return loans;
+  }
 }

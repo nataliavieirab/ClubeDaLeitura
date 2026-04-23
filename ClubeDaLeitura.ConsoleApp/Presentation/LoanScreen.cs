@@ -56,6 +56,71 @@ public class LoanScreen
     screen.ShowMessage($"✅ O empréstimo #{loan.Id} foi aberto com sucesso!");
   }
 
+  public void ShowAll(bool showHeader)
+  {
+    if (showHeader) screen.OperationHeader("Visualização de Empréstimos");
+
+    string line = screen.GetUIDoubleLine();
+
+    Console.Write($"\n{line}");
+    Console.WriteLine(
+        "\n{0, -7} | {1, -15} | {2, -10} | {3, -10} | {4, -15} | {5, -10}",
+        "Id", "Revista", "Amigo", "Abertura", "Conclusão Prev.", "Status"
+    );
+
+    Loan?[] loans = [.. repository.FindAll()];
+
+    for (int i = 0; i < loans.Length; i++)
+    {
+      Loan? l = loans[i];
+
+      if (l == null)
+        continue;
+
+      Console.Write("{0, -7} | ", l.Id);
+      Console.Write("{0, -15} | ", l.Magazine.Title);
+      Console.Write("{0, -10} | ", l.Friend.Name);
+      Console.Write("{0, -10} | ", l.OpenDate.ToShortDateString());
+      Console.Write("{0, -15} | ", l.DueDate.ToShortDateString());
+
+      string status = l.Status.ToString();
+
+      if (l.IsLate)
+      {
+        Console.ForegroundColor = ConsoleColor.Red;
+        status = "Atrasado";
+      }
+      else if (l.Status == LoanStatus.Undefined)
+      {
+        Console.ForegroundColor = ConsoleColor.Blue;
+        status = "Indefinido";
+      }
+      else if (l.Status == LoanStatus.Open)
+      {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        status = "Aberto";
+      }
+      else if (l.Status == LoanStatus.Completed)
+      {
+        Console.ForegroundColor = ConsoleColor.Green;
+        status = "Concluído";
+      }
+
+      Console.Write("{0, -10}", status);
+
+      Console.ResetColor();
+      Console.WriteLine();
+    }
+
+    Console.WriteLine(line);
+
+    if (showHeader)
+    {
+      Console.Write("\nDigite ENTER para continuar... ");
+      Console.ReadLine();
+    }
+  }
+
   private Loan GetRegistrationData()
   {
 

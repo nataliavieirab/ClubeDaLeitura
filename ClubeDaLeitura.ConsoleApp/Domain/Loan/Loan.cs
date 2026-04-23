@@ -17,7 +17,13 @@ public class Loan
     }
   }
   public LoanStatus Status { get; set; } = LoanStatus.Undefined;
-
+  public bool IsLate
+  {
+    get
+    {
+      return Status == LoanStatus.Open && DateTime.Now > DueDate;
+    }
+  }
   public Loan(Magazine magazine, Friend friend)
   {
 

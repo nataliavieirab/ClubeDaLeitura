@@ -20,11 +20,12 @@ boxRepository.Create(box);
 Magazine magazine = new("Action Comics", 155, 1990, box);
 magazineRepository.Create(magazine);
 
-Friend friend = new("Savarininho", "Savarino", "48 99976 5544");
+Friend friend = new("João", "Julio", "48 99976 5544");
 friendRepository.Create(friend);
 
 Loan loan = new(magazine, friend);
 loan.Open();
+loanRepository.Create(loan);
 
 ScreenUtils screen = new("Clube da Leitura");
 
@@ -113,7 +114,7 @@ while (true)
 
       // else if (innerMenuOption == "2") loanScreen.();
 
-      // else if (innerMenuOption == "3") loanScreen.ShowAll(showHeader: true);
+      else if (innerMenuOption == "3") loanScreen.ShowAll(showHeader: true);
     }
   }
 }
