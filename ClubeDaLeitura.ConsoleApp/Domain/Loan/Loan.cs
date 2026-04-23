@@ -7,12 +7,20 @@ public class Loan
   public string Id { get; set; } = string.Empty;
   public Magazine Magazine { get; set; }
   public Friend Friend { get; set; }
-  public DateTime Abertura { get; set; }
-  public DateTime ConclusaoPrevista { get; set; }
+  public DateTime OpenDate { get; set; }
+  public DateTime DueDate
+  {
+    get
+    {
+      int loanDays = Magazine.Box.LoanDays;
+      return OpenDate.AddDays(loanDays);
+    }
+  }
   public LoanStatus Status { get; set; } = LoanStatus.Undefined;
 
   public Loan(Magazine magazine, Friend friend)
   {
+
     Id = Convert
             .ToHexString(RandomNumberGenerator.GetBytes(20))
             .ToLower()
@@ -24,6 +32,7 @@ public class Loan
 
   public string[] Validate()
   {
+
     string errors = string.Empty;
 
     if (Magazine == null)
@@ -33,5 +42,12 @@ public class Loan
       errors = "O campo \"Amigo\" deve ser preenchido;";
 
     return errors.Split(';', StringSplitOptions.RemoveEmptyEntries);
+  }
+
+  public void Open()
+  {
+
+    OpenDate = DateTime.Now;
+    Magazine.MarkAsLoaned();
   }
 }

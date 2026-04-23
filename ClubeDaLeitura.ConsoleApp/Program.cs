@@ -2,6 +2,7 @@
 using ClubeDaLeitura.ConsoleApp.Infra;
 using ClubeDaLeitura.ConsoleApp.Presentation;
 
+// 1. Instanciação de dependências
 BoxRepository boxRepository = new();
 MagazineRepository magazineRepository = new();
 FriendRepository friendRepository = new();
@@ -10,6 +11,7 @@ BoxScreen boxScreen = new(boxRepository);
 MagazineScreen magazineScreen = new(magazineRepository, boxRepository, boxScreen);
 FriendScreen friendScreen = new(friendRepository);
 
+// 2. Criação de dados teste
 Box box = new("Lançamentos", "Vermelho", 3);
 boxRepository.Create(box);
 
@@ -18,6 +20,9 @@ magazineRepository.Create(magazine);
 
 Friend friend = new("Savarininho", "Savarino", "48 99976 5544");
 friendRepository.Create(friend);
+
+Loan loan = new(magazine, friend);
+loan.Open();
 
 ScreenUtils screen = new("Clube da Leitura");
 

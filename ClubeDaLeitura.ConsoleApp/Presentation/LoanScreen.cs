@@ -1,3 +1,5 @@
+using ClubeDaLeitura.ConsoleApp.Domain;
+
 namespace ClubeDaLeitura.ConsoleApp.Presentation;
 
 public class LoanScreen
@@ -19,5 +21,30 @@ public class LoanScreen
   }
 
 
+  public void Open()
+  {
+
+    screen.OperationHeader("Abertura de Emprestimo");
+
+    Loan? newLoan = GetRegistrationData();
+
+    string[] errors = newLoan!.Validate();
+
+    if (errors.Length > 0)
+    {
+      screen.ShowError(errors);
+
+      Open();
+      return;
+    }
+
+    newLoan.Open();
+
+  }
+
+  private Loan? GetRegistrationData()
+  {
+    return null;
+  }
 
 }

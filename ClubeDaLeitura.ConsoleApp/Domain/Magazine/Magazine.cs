@@ -47,4 +47,9 @@ public class Magazine : DefaultEntity<Magazine>
     ReleaseYear = updatedMagazine.ReleaseYear;
     Box = updatedMagazine.Box;
   }
+
+  public void MarkAsLoaned()
+  {
+
+  }
 }
