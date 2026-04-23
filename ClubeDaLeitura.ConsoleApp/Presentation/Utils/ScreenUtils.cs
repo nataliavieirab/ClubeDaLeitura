@@ -76,6 +76,22 @@ public class ScreenUtils
     ShowEnterMessage();
   }
 
+  public string GetEntityID(string entityName)
+  {
+    string? selectedId;
+
+    do
+    {
+      Console.WriteLine($"\nDigite o ID do/a {entityName}");
+      Console.Write("> ");
+      selectedId = Console.ReadLine();
+
+      if (!string.IsNullOrWhiteSpace(selectedId) && selectedId.Length == 7) break;
+    } while (true);
+
+    return selectedId;
+  }
+
   public string GetUIDoubleLine()
   {
     return "==========================================================================================================";

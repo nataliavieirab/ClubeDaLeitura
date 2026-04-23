@@ -48,6 +48,9 @@ public class Loan
   {
 
     OpenDate = DateTime.Now;
+    Status = LoanStatus.Open;
+
     Magazine.MarkAsLoaned();
+    Friend.AddLoan(this);
   }
 }

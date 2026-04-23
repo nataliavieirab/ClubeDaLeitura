@@ -6,6 +6,7 @@ public class Magazine : DefaultEntity<Magazine>
   public int NumberEdition { get; set; }
   public int ReleaseYear { get; set; }
   public Box Box { get; set; }
+  public MagazineStatus Status { get; set; }
 
   public Magazine(string title, int numberEdition, int releaseYear, Box box)
   {
@@ -50,6 +51,11 @@ public class Magazine : DefaultEntity<Magazine>
 
   public void MarkAsLoaned()
   {
+    Status = MagazineStatus.Loaned;
+  }
 
+  public void MarkAsAvailable()
+  {
+    Status = MagazineStatus.Available;
   }
 }

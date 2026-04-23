@@ -36,7 +36,7 @@ public class FriendScreen : DefaultScreen<Friend>
 
       Console.WriteLine(
           "{0, -7} | {1, -15} | {2, -15} | {3, -13}",
-          f.Id, f.name, f.guardianName, f.phoneNumber
+          f.Id, f.Name, f.GuardianName, f.PhoneNumber
       );
 
       Console.ResetColor();

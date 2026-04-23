@@ -6,10 +6,12 @@ using ClubeDaLeitura.ConsoleApp.Presentation;
 BoxRepository boxRepository = new();
 MagazineRepository magazineRepository = new();
 FriendRepository friendRepository = new();
+LoanRepository loanRepository = new();
 
 BoxScreen boxScreen = new(boxRepository);
 MagazineScreen magazineScreen = new(magazineRepository, boxRepository, boxScreen);
 FriendScreen friendScreen = new(friendRepository);
+LoanScreen loanScreen = new(loanRepository, magazineRepository, friendRepository);
 
 // 2. Criação de dados teste
 Box box = new("Lançamentos", "Vermelho", 3);
@@ -99,7 +101,7 @@ while (true)
 
     else if (mainMenuOption == "4") // Loans
     {
-      // innerMenuOption = loanScreen.GetMenuOption();
+      innerMenuOption = loanScreen.GetMenuOption();
 
       if (innerMenuOption == "S")
       {
@@ -107,13 +109,11 @@ while (true)
         break;
       }
 
-      // if (innerMenuOption == "1") loanScreen.Register();
+      if (innerMenuOption == "1") loanScreen.Open();
 
-      // else if (innerMenuOption == "2") loanScreen.Edit();
+      // else if (innerMenuOption == "2") loanScreen.();
 
-      // else if (innerMenuOption == "3") loanScreen.Delete();
-
-      // else if (innerMenuOption == "4") loanScreen.ShowAll(showHeader: true);
+      // else if (innerMenuOption == "3") loanScreen.ShowAll(showHeader: true);
     }
   }
 }

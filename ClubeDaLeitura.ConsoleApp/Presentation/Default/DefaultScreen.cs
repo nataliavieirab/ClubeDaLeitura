@@ -61,7 +61,7 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
 
     ShowAll(showHeader: false);
 
-    string? selectedId = GetID();
+    string? selectedId = screen.GetEntityID(entityName);
 
     Console.WriteLine();
     screen.ShowUISimpleLine();
@@ -96,7 +96,7 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
 
     ShowAll(showHeader: false);
 
-    string? selectedId = GetID();
+    string? selectedId = screen.GetEntityID(entityName);
 
     bool success = repository.Delete(selectedId);
 
@@ -113,19 +113,4 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
 
   protected abstract T GetRegistrationData();
 
-  private string GetID()
-  {
-    string? selectedId;
-
-    do
-    {
-      Console.WriteLine($"\nDigite o ID da {entityName}");
-      Console.Write("> ");
-      selectedId = Console.ReadLine();
-
-      if (!string.IsNullOrWhiteSpace(selectedId) && selectedId.Length == 7) break;
-    } while (true);
-
-    return selectedId;
-  }
 }
