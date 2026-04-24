@@ -112,7 +112,7 @@ while (true)
 
       if (innerMenuOption == "1") loanScreen.Open();
 
-      // else if (innerMenuOption == "2") loanScreen.();
+      else if (innerMenuOption == "2") loanScreen.Complete();
 
       else if (innerMenuOption == "3") loanScreen.ShowAll(showHeader: true);
     }

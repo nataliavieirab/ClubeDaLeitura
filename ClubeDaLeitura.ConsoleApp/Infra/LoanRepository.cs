@@ -16,4 +16,10 @@ public class LoanRepository
   {
     return loans;
   }
+
+  public Loan? FindById(string? id)
+  {
+
+    return loans.Find(l => l.Id == id);
+  }
 }

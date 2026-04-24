@@ -35,7 +35,7 @@ public class LoanScreen
   public void Open()
   {
 
-    screen.OperationHeader("Abertura de Emprestimo");
+    screen.OperationHeader("Abertura de Empréstimo");
 
     Loan loan = GetRegistrationData();
 
@@ -54,6 +54,38 @@ public class LoanScreen
     repository.Create(loan);
 
     screen.ShowMessage($"✅ O empréstimo #{loan.Id} foi aberto com sucesso!");
+  }
+
+  public void Complete()
+  {
+    screen.OperationHeader("Conclusão de Empréstimo");
+
+    ShowAll(showHeader: false);
+
+    Loan? loan = null;
+
+    do
+    {
+      string? loanId = screen.GetEntityID("empréstimo");
+
+      loan = repository.FindById(loanId);
+
+    } while (loan == null);
+
+    ShowLoanData(loan);
+
+    Console.Write("\nDeseja realmente concluir o empréstimo selecionado? [S/N]: ");
+    string? option = Console.ReadLine()?.ToUpper();
+
+    if (option != "S")
+    {
+      screen.ShowEnterMessage();
+      return;
+    }
+
+    loan.Complete();
+
+    screen.ShowMessage($"✅ O empréstimo #{loan.Id} foi concluído com sucesso!");
   }
 
   public void ShowAll(bool showHeader)
@@ -119,6 +151,23 @@ public class LoanScreen
       Console.Write("\nDigite ENTER para continuar... ");
       Console.ReadLine();
     }
+  }
+
+  public void ShowLoanData(Loan loan)
+  {
+
+    string line = screen.GetUIDoubleLine();
+
+    Console.WriteLine("\n>> Empréstimo selecionado:");
+    Console.Write($"{line}");
+    Console.WriteLine(
+    "\n{0, -7} | {1, -15} | {2, -10} | {3, -10} | {4, -15}",
+    "ID", "Revista", "Amigo", "Abertura", "Conclusão Prev.");
+    Console.WriteLine(
+        "{0, -7} | {1, -15} | {2, -10} | {3, -10} | {4, -15}",
+        loan.Id, loan.Magazine.Title, loan.Friend.Name, loan.OpenDate.ToShortDateString(), loan.DueDate.ToShortDateString()
+    );
+    Console.WriteLine(line);
   }
 
   private Loan GetRegistrationData()
@@ -222,5 +271,4 @@ public class LoanScreen
 
     Console.WriteLine(line);
   }
-
 }

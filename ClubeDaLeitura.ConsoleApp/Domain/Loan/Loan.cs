@@ -59,4 +59,12 @@ public class Loan
     Magazine.MarkAsLoaned();
     Friend.AddLoan(this);
   }
+
+  public void Complete()
+  {
+
+    Status = LoanStatus.Completed;
+
+    Magazine.MarkAsAvailable();
+  }
 }
