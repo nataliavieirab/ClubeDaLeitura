@@ -95,8 +95,8 @@ public class MagazineScreen : DefaultScreen<Magazine>
   {
 
     screen.OperationHeader("GUARDAR REVISTA");
+    Console.WriteLine("\n📋 LISTA DE CAIXAS:");
 
-    Console.WriteLine("📋 LISTA DE CAIXAS:");
     boxScreen.ShowAll(showHeader: false);
 
     string? boxId;
