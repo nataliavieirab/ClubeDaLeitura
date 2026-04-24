@@ -27,8 +27,8 @@ public class MagazineScreen : DefaultScreen<Magazine>
 
     Console.Write($"\n{line}");
     Console.WriteLine(
-        "\n{0, -7} | {1, -25} | {2, -6} | {3, -4} | {4, -15}",
-        "ID", "Título", "Edição", "Ano", "Caixa"
+        "\n{0, -7} | {1, -25} | {2, -6} | {3, -4} | {4, -10} | {5, -15}",
+        "ID", "Título", "Edição", "Ano", "Status", "Caixa"
     );
 
     Magazine?[] magazines = [.. repository.FindAll()];
