@@ -1,9 +1,10 @@
 using ClubeDaLeitura.ConsoleApp.Domain;
 using ClubeDaLeitura.ConsoleApp.Infra;
+using ClubeDaLeitura.ConsoleApp.Presentation.Default;
 
 namespace ClubeDaLeitura.ConsoleApp.Presentation;
 
-public class LoanScreen
+public class LoanScreen : IScreen
 {
   private readonly ScreenUtils screen = new("Gestão de Empréstimos");
   private readonly LoanRepository repository = new();
@@ -18,7 +19,7 @@ public class LoanScreen
     this.friendRepository = friendRepository;
   }
 
-  public string? GetMenuOption()
+  public string GetMenuOption()
   {
 
     screen.MainHeader();
@@ -27,11 +28,25 @@ public class LoanScreen
     Console.WriteLine($"[3] Visualizar");
     Console.WriteLine($"[S] Voltar para o início");
     Console.Write("\n> ");
-    string? mainOption = Console.ReadLine()?.ToUpper();
+    string? input = Console.ReadLine()?.ToUpper();
 
-    return mainOption;
+    return string.IsNullOrWhiteSpace(input)
+        ? string.Empty
+        : input.ToUpper();
   }
 
+  public void HandleOption(string option)
+  {
+
+    if (option == "1")
+      Open();
+
+    else if (option == "2")
+      Complete();
+
+    else if (option == "3")
+      ShowAll(true);
+  }
   public void Open()
   {
 

@@ -1,9 +1,10 @@
 using ClubeDaLeitura.ConsoleApp.Domain;
 using ClubeDaLeitura.ConsoleApp.Infra;
+using ClubeDaLeitura.ConsoleApp.Presentation.Default;
 
 namespace ClubeDaLeitura.ConsoleApp.Presentation;
 
-public abstract class DefaultScreen<T> where T : DefaultEntity<T>
+public abstract class DefaultScreen<T> : IScreen where T : DefaultEntity<T>
 {
   private readonly ScreenUtils screen;
   public string entityName = string.Empty;
@@ -17,7 +18,7 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
     this.repository = repository;
   }
 
-  public string? GetMenuOption()
+  public string GetMenuOption()
   {
 
     screen.MainHeader();
@@ -27,9 +28,26 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
     Console.WriteLine($"[4] Visualizar {entityName}s");
     Console.WriteLine($"[S] Voltar para o início");
     Console.Write("\n> ");
-    string? mainOption = Console.ReadLine()?.ToUpper();
+    string? input = Console.ReadLine()?.ToUpper();
 
-    return mainOption;
+    return string.IsNullOrWhiteSpace(input)
+        ? string.Empty
+        : input.ToUpper();
+  }
+
+  public void HandleOption(string option)
+  {
+    if (option == "1")
+      Register();
+
+    else if (option == "2")
+      Edit();
+
+    else if (option == "3")
+      Delete();
+
+    else if (option == "4")
+      ShowAll(true);
   }
 
   public void Register()
@@ -112,5 +130,4 @@ public abstract class DefaultScreen<T> where T : DefaultEntity<T>
   public abstract void ShowAll(bool showHeader);
 
   protected abstract T GetRegistrationData();
-
 }

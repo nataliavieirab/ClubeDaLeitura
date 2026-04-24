@@ -9,14 +9,12 @@ public class MagazineScreen : DefaultScreen<Magazine>
   private readonly ScreenUtils screen = new("Gestão de Revistas");
   public MagazineRepository repository;
   public BoxRepository boxRepository;
-  public BoxScreen boxScreen;
 
-  public MagazineScreen(MagazineRepository _repository, BoxRepository _boxRepository, BoxScreen _boxScreen) : base("Revista", _repository)
+  public MagazineScreen(MagazineRepository _repository, BoxRepository _boxRepository) : base("Revista", _repository)
   {
 
     repository = _repository;
     boxRepository = _boxRepository;
-    boxScreen = _boxScreen;
   }
 
   public override void ShowAll(bool showHeader)
@@ -104,6 +102,8 @@ public class MagazineScreen : DefaultScreen<Magazine>
 
     screen.OperationHeader("GUARDAR REVISTA");
     Console.WriteLine("\n📋 LISTA DE CAIXAS:");
+
+    BoxScreen boxScreen = new BoxScreen(boxRepository);
 
     boxScreen.ShowAll(showHeader: false);
 
