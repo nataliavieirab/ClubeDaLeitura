@@ -45,7 +45,15 @@ public class MagazineScreen : DefaultScreen<Magazine>
       Console.Write("{0, -6} | ", m.NumberEdition);
       Console.Write("{0, -4} | ", m.ReleaseYear);
 
+      string status;
       string selectedColor = m.Box.Color;
+
+      if (m.Status == MagazineStatus.Available)
+        status = "Disponível";
+      else
+        status = "Emprestada";
+
+      Console.Write("{0, -10} | ", status);
 
       if (selectedColor == "Vermelho")
         Console.ForegroundColor = ConsoleColor.Red;
