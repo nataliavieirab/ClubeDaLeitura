@@ -70,7 +70,7 @@ public class MainScreen
       return new LoanScreen(loanRepository, magazineRepository, friendRepository);
 
     if (menuOption == "5")
-      return new FineScreen(fineRepository, loanRepository);
+      return new FineScreen(fineRepository, loanRepository, friendRepository);
 
     return null;
   }

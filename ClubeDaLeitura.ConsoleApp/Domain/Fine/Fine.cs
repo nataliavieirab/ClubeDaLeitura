@@ -6,11 +6,8 @@ public class Fine
 {
 
   public string Id { get; set; } = string.Empty;
-
   public Loan Loan { get; private set; }
-
   public decimal Amount { get; private set; }
-
   public FineStatus Status { get; private set; } = FineStatus.Undefined;
 
   public Fine(Loan loan)
@@ -29,6 +26,7 @@ public class Fine
 
     Status = FineStatus.Pending;
   }
+
   public void CalculateAmount()
   {
     int daysLate = Loan.CalculateDelayDays();
