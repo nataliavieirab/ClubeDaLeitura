@@ -143,7 +143,7 @@ public class FineScreen : IScreen
       else if (f.Status == FineStatus.Paid)
       {
         Console.ForegroundColor = ConsoleColor.Green;
-        status = "Pago";
+        status = "Quitada";
       }
 
       Console.Write("{0, -10}", status);
