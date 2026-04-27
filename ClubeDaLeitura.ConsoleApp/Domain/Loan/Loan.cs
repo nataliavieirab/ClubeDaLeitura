@@ -24,6 +24,7 @@ public class Loan
       return Status == LoanStatus.Open && DateTime.Now > DueDate;
     }
   }
+
   public Loan(Magazine magazine, Friend friend)
   {
 
@@ -66,5 +67,11 @@ public class Loan
     Status = LoanStatus.Completed;
 
     Magazine.MarkAsAvailable();
+  }
+
+  public int CalculateDelayDays()
+  {
+
+    return (DueDate - DateTime.Now).Days;
   }
 }

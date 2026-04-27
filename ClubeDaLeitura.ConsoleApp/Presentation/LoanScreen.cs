@@ -47,6 +47,7 @@ public class LoanScreen : IScreen
     else if (option == "3")
       ShowAll(true);
   }
+
   public void Open()
   {
 
