@@ -40,9 +40,4 @@ public class FineRepository
         .ToList();
   }
 
-  public bool HasFine(string loanId)
-  {
-
-    return fines.Any(f => f.Loan.Id == loanId);
-  }
 }

@@ -57,7 +57,10 @@ public class FineScreen : IScreen
 
     foreach (var loan in loans)
     {
-      if (loan.IsLate && !repository.HasFine(loan.Id))
+
+      bool alreadyHasFine = repository.FindAll().Any(f => f.Loan.Id == loan.Id);
+
+      if (loan.IsLate && !alreadyHasFine)
       {
         Fine fine = new(loan);
 
