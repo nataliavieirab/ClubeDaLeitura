@@ -72,6 +72,6 @@ public class Loan
   public int CalculateDelayDays()
   {
 
-    return (DueDate - DateTime.Now).Days;
+    return (DateTime.Now - DueDate).Days;
   }
 }
