@@ -2,7 +2,7 @@ namespace ClubeDaLeitura.ConsoleApp.Domain.Fine;
 
 public enum FineStatus
 {
-  Open,
+  Pending,
   Paid,
   Undefined
 }

@@ -13,19 +13,22 @@ public class MainScreen
   private MagazineRepository magazineRepository;
   private FriendRepository friendRepository;
   private LoanRepository loanRepository;
+  private FineRepository fineRepository;
 
   public MainScreen
   (
       BoxRepository boxRepository,
       MagazineRepository magazineRepository,
       FriendRepository friendRepository,
-      LoanRepository loanRepository
+      LoanRepository loanRepository,
+      FineRepository fineRepository
   )
   {
     this.boxRepository = boxRepository;
     this.magazineRepository = magazineRepository;
     this.friendRepository = friendRepository;
     this.loanRepository = loanRepository;
+    this.fineRepository = fineRepository;
 
     Box box = new Box("Lançamentos", "Vermelho", 3);
     boxRepository.Create(box);
@@ -38,6 +41,7 @@ public class MainScreen
 
     Loan loan = new Loan(magazine, friend);
     loan.Open();
+    loan.OpenDate = DateTime.Now.AddDays(-7);
     loanRepository.Create(loan);
   }
 
@@ -48,6 +52,7 @@ public class MainScreen
     Console.WriteLine("[2] Gerenciar Revistas");
     Console.WriteLine("[3] Gerenciar Amigos");
     Console.WriteLine("[4] Gerenciar Empréstimos");
+    Console.WriteLine("[5] Gerenciar Multas");
     Console.WriteLine("[S] Sair");
     Console.Write("\n> ");
     string menuOption = Console.ReadLine()?.ToUpper()!;
@@ -63,6 +68,9 @@ public class MainScreen
 
     if (menuOption == "4")
       return new LoanScreen(loanRepository, magazineRepository, friendRepository);
+
+    if (menuOption == "5")
+      return new FineScreen(fineRepository, loanRepository);
 
     return null;
   }

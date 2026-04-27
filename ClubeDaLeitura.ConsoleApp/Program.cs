@@ -7,8 +7,9 @@ BoxRepository boxRepository = new();
 MagazineRepository magazineRepository = new();
 FriendRepository friendRepository = new();
 LoanRepository loanRepository = new();
+FineRepository fineRepository = new();
 
-MainScreen mainScreen = new(boxRepository, magazineRepository, friendRepository, loanRepository);
+MainScreen mainScreen = new(boxRepository, magazineRepository, friendRepository, loanRepository, fineRepository);
 
 while (true)
 {

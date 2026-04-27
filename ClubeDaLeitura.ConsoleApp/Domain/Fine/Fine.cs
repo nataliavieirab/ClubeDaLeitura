@@ -13,8 +13,6 @@ public class Fine
 
   public FineStatus Status { get; private set; } = FineStatus.Undefined;
 
-  public DateTime CreatedAt { get; private set; }
-
   public Fine(Loan loan)
   {
 
@@ -26,24 +24,17 @@ public class Fine
     Loan = loan;
   }
 
-  public string[] Validate()
+  public void SetPending()
   {
 
-    string errors = string.Empty;
-
-    if (Loan == null)
-      errors = "O campo \"Loan\" deve ser preenchido;";
-
-    return errors.Split(';', StringSplitOptions.RemoveEmptyEntries);
+    Status = FineStatus.Pending;
   }
-
   public void CalculateAmount()
   {
     int daysLate = Loan.CalculateDelayDays();
 
     Amount = daysLate * 2.0m;
   }
-
 
   public void Pay()
   {
