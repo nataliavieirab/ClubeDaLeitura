@@ -1,112 +1,111 @@
-# Clube da Leitura
+# Reading Club
 
-Gustavo tem uma coleção grande de revistas em quadrinhos. Por isso, resolveu
-emprestar para os amigos. Assim foi criado o Clube da Leitura.
+Gustavo has a large comic book collection, so he decided to lend them to his friends.  
+That is how the Reading Club was created.
 
-Mas para não perder nenhuma revista, seu pai contratou os alunos da Academia do
-Programador para fazer uma aplicação que cadastra as revistas e controla os
-empréstimos.
+To avoid losing any comic books, his father hired the students from the Programming Academy to build an application capable of managing comic books and controlling loans.
 
-## 1. Módulo de Caixas
+## 1. Boxes Module
 
-**Requisitos Funcionais:**
+### Functional Requirements
 
-- O sistema deve permitir cadastrar novas caixas
-- O sistema deve permitir editar caixas existentes
-- O sistema deve permitir excluir caixas
-- O sistema deve permitir visualizar todas as caixas
+- The system must allow registering new boxes
+- The system must allow editing existing boxes
+- The system must allow deleting boxes
+- The system must allow viewing all boxes
 
-**Regras de Negócio:**
+### Business Rules
 
-- Campos obrigatórios:
-- Etiqueta (texto único, máximo 50 caracteres)
-- Cor (seleção de paleta ou hexadecimal)
-- Dias de empréstimo (número, padrão 7)
-- Não pode haver etiquetas duplicadas
-- Não permitir excluir uma caixa caso tenha revistas vinculadas
-- Cada caixa define o prazo máximo para empréstimo de suas revistas
+- Required fields:
+  - Label (unique text, maximum 50 characters)
+  - Color (palette selection or hexadecimal value)
+  - Loan days (number, default value: 7)
+- Duplicate labels are not allowed
+- A box cannot be deleted if it contains linked comic books
+- Each box defines the maximum loan period for its comic books
 
-## 2. Módulo de Revistas
+## 2. Comic Books Module
 
-**Requisitos Funcionais:**
+### Functional Requirements
 
-- O sistema deve permitir cadastrar novas revistas
-- O sistema deve permitir editar revistas existentes
-- O sistema deve permitir excluir revistas
-- O sistema deve permitir visualizar todas as revistas
+- The system must allow registering new comic books
+- The system must allow editing existing comic books
+- The system must allow deleting comic books
+- The system must allow viewing all comic books
 
-**Regras de Negócio:**
+### Business Rules
 
-- Campos obrigatórios:
-  - Título (2-100 caracteres)
-  - Número da edição (número positivo)
-  - Ano de publicação (data válida)
-  - Caixa (seleção obrigatória)
-- Não pode haver revistas com mesmo título e edição
+- Required fields:
+  - Title (2-100 characters)
+  - Issue number (positive number)
+  - Publication year (valid date)
+  - Box (required selection)
+- Comic books cannot share the same title and issue number
 
-## 3. Módulo de Amigos
+## 3. Friends Module
 
-**Requisitos Funcionais**
+### Functional Requirements
 
-- O sistema deve permitir a inserção de novos amigos
-- O sistema deve permitir a edição de amigos já cadastrados
-- O sistema deve permitir excluir amigos já cadastrados
-- O sistema deve permitir visualizar amigos cadastrados
+- The system must allow adding new friends
+- The system must allow editing registered friends
+- The system must allow deleting registered friends
+- The system must allow viewing registered friends
 
-**Regras de Negócio:**
+### Business Rules
 
-- Campos obrigatórios:
-  - Nome (mínimo 3 caracteres, máximo 100)
-  - Nome do responsável (mínimo 3 caracteres, máximo 100)
-  - Telefone (formato validado: 10-11 dígitos)
-  - Não pode haver amigos com o mesmo nome e telefone
+- Required fields:
+  - Name (minimum 3 characters, maximum 100)
+  - Guardian name (minimum 3 characters, maximum 100)
+  - Phone number (validated format: 10-11 digits)
+- Friends cannot share the same name and phone number
 
-## 4. Módulo de Empréstimos
+## 4. Loans Module
 
-**Requisitos Funcionais:**
+### Functional Requirements
 
-- O sistema deve permitir registrar novos empréstimos
-- O sistema deve permitir registrar devoluções
-- O sistema deve permitir visualizar empréstimos abertos e fechados
+- The system must allow registering new loans
+- The system must allow registering returns
+- The system must allow viewing open and closed loans
 
-**Refatorações:**
+### Refactorings
 
-**Revistas:**
+#### Comic Books
 
-- O sistema deve armazenar e mostrar o status atual das revistas cadastradas (disponível/emprestada/reservada)
+- The system must store and display the current status of comic books (available/loaned/reserved)
 
-**Amigos:**
+#### Friends
 
-- O sistema deve permitir visualizar os empréstimos de amigos específicos
-- Não permitir excluir um amigo caso tenha empréstimos vinculados
-  Regras de Negócio:
-- Campos obrigatórios:
-  - Amigo
-  - Revista (disponível no momento)
-  - Data empréstimo (automática)
-  - Data devolução (calculada conforme caixa)
-- Status possíveis: Aberto / Concluído / Atrasado
-- Cada amigo só pode ter um empréstimo ativo por vez
-- Empréstimos atrasados devem ser destacados visualmente
-- A data de devolução é calculada automaticamente (data empréstimo + dias da
-  caixa)
+- The system must allow viewing loans from specific friends
+- A friend cannot be deleted if they have linked loans
 
-## Como utilizar
+### Business Rules
 
-1. Clone o repositório ou baixe o código fonte.
-2. Abra o terminal ou o prompt de comando e navegue até a pasta raiz
-3. Utilize o comando abaixo para restaurar as dependências do projeto.
+- Required fields:
+  - Friend
+  - Comic book (must be available)
+  - Loan date (automatic)
+  - Return date (calculated according to the box)
+- Possible statuses: Open / Completed / Late
+- Each friend can only have one active loan at a time
+- Late loans must be visually highlighted
+- The return date must be automatically calculated (loan date + box loan days)
 
-   ```bash
-   dotnet restore
-   ```
+## How to Use
 
-4. Para executar o projeto compilando em tempo real
+1. Clone the repository or download the source code.
+2. Open the terminal or command prompt and navigate to the root folder.
+3. Run the command below to restore the project dependencies.
 
-   ```bash
-   dotnet run --project ClubeDaLeitura.ConsoleApp
-   ```
+```bash
+dotnet restore
+```
 
-## Requisitos
+4. Run the project with real-time compilation.
+
+```bash
+dotnet run --project ReadingClub.ConsoleApp
+```
+
+## Requirements
 
 - .NET 10.0 SDK
